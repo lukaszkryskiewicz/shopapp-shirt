@@ -1,6 +1,6 @@
 import styles from './Product.module.scss';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
 import ProductOptions from '../ProductOptions/ProductOptions';
 
@@ -12,10 +12,10 @@ const Product = props => {
 
   const changeSize = size => setCurrentSize(size);
   const changeColor = color => setCurrentColor(color);
-  const getPrice = () => {
+  const getPrice = useMemo(() => {
     const currentIndex = props.sizes.findIndex((size) => size.name === currentSize)
     return (props.basePrice + props.sizes[currentIndex].additionalPrice)
-  }
+  }, [currentSize, props.basePrice, props.sizes])
 
 
   return (
@@ -24,9 +24,9 @@ const Product = props => {
       <div>
         <header>
           <h2 className={styles.name}>{props.title}</h2>
-          <span className={styles.price}>Price: {getPrice()}$</span>
+          <span className={styles.price}>Price: {getPrice}$</span>
         </header>
-        <ProductOptions key={props.id} sizesObj={props.sizes} actionSize={changeSize} currentSize={currentSize} colorsArr={props.colors} actionColor={changeColor} currentColor={currentColor} getPrice={getPrice()} title={props.title} />
+        <ProductOptions key={props.id} id={props.id} sizesObj={props.sizes} actionSize={changeSize} currentSize={currentSize} colorsArr={props.colors} actionColor={changeColor} currentColor={currentColor} getPrice={getPrice} title={props.title} />
       </div >
     </article >
   )

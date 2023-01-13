@@ -2,6 +2,7 @@ import styles from './ProductOptions.module.scss';
 import OptionSize from '../OptionSize/OptionSize';
 import OptionColor from '../OptionColor/OptionColor';
 import Button from '../Button/Button';
+import PropTypes from 'prop-types';
 
 const ProductOptions = props => {
 
@@ -32,5 +33,19 @@ const ProductOptions = props => {
     </form>
   )
 }
+
+ProductOptions.propTypes = {
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  colorsArr: PropTypes.array.isRequired,
+  sizesObj: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  })),
+  currentColor: PropTypes.string.isRequired,
+  currentSize: PropTypes.string.isRequired,
+  actionSize: PropTypes.func.isRequired,
+  actionColor: PropTypes.func.isRequired,
+  getPrice: PropTypes.number.isRequired,
+};
 
 export default ProductOptions;
