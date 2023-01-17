@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 
 const ProductOptions = props => {
 
-  const summary = () => {
+  const summary = (e) => {
+    e.preventDefault();
     console.log(`
         Summary
         =============
@@ -18,7 +19,7 @@ const ProductOptions = props => {
   }
 
   return (
-    <form>
+    <form onSubmit={(summary)}>
       <div className={styles.sizes}>
         <h3 className={styles.optionLabel}>Sizes</h3>
         <OptionSize key={props.id} sizesObj={props.sizesObj} actionSize={props.actionSize} currentSize={props.currentSize} />
@@ -28,7 +29,7 @@ const ProductOptions = props => {
         <OptionColor key={props.id} colorsArr={props.colorsArr} actionColor={props.actionColor} currentColor={props.currentColor} />
       </div>
       <Button className={styles.button}>
-        <span onClick={() => summary()} className="fa fa-shopping-cart" />
+        <span className="fa fa-shopping-cart" />
       </Button>
     </form>
   )
